@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const LoginForm = props => {
+const RegisterForm = props => {
   return (
-    <form className="auth-form" onSubmit={props.login}>
+    <form className="auth-form" onSubmit={props.register}>
       <label htmlFor="username">Username</label>
       <br />
       <input
@@ -11,7 +11,7 @@ const LoginForm = props => {
         name="username"
         placeholder="Username"
         type="text"
-        value={props.loginInfo.username}
+        value={props.registerInfo.username}
         onChange={props.handleChange}
       />
       <br />
@@ -23,16 +23,16 @@ const LoginForm = props => {
         name="password"
         placeholder="Password"
         type="text"
-        value={props.loginInfo.password}
+        value={props.registerInfo.password}
         onChange={props.handleChange}
       />
       <br />
-      <button>Log In</button>
+      <button>Register</button>
       <p>
-        Don't have and account? <Link to="/register">Register</Link>
+        Already have and account? <Link to="/login">Login</Link>
       </p>
     </form>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
