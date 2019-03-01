@@ -1,0 +1,18 @@
+ul {
+  max-width: 600px;
+  margin: 0 auto;
+}
+li {
+  margin-bottom: 5px;
+}
+
+.logout-btn {
+  font-size: 18px;
+  background: none;
+  border: none;
+  background: #2ecc71;
+  color: white;
+  padding: 10px 40px;
+  border-radius: 4px;
+  margin-top: 30px;
+}

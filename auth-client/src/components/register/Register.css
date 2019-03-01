@@ -1,0 +1,31 @@
+.auth-form {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.auth-form input {
+  width: 100%;
+  font-size: 18px;
+  padding: 2px;
+  border-radius: 4px;
+  border: none;
+  border: 1px solid rgb(187, 187, 187);
+  margin-bottom: 10px;
+}
+
+.auth-form button {
+  width: 100%;
+  font-size: 18px;
+  background: none;
+  border: none;
+  background: #2ecc71;
+  color: white;
+  padding: 10px;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.auth-form p {
+  text-align: center;
+}

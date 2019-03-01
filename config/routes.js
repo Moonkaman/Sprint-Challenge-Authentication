@@ -1,19 +1,44 @@
 const axios = require('axios');
+const bcrypt = require('bcryptjs');
 
 const { authenticate } = require('../auth/authenticate');
+const generateToken = require('./tokenServices');
+const db = require('../database/helpers/authDb');
 
 module.exports = server => {
   server.post('/api/register', register);
   server.post('/api/login', login);
   server.get('/api/jokes', authenticate, getJokes);
+  server.get('/api/users', authenticate, getUsers);
 };
 
 function register(req, res) {
-  // implement user registration
+  if(req.body.username && req.body.password) {
+    req.body.password = bcrypt.hashSync(req.body.password, 12);
+    db.insert(req.body)
+      .then(newUser => {
+        const token = generateToken(newUser);
+        res.status(201).json({...newUser, token});
+      })
+  } else {
+    res.status(400).json({message: 'Please provide a username and password'});
+  }
 }
 
 function login(req, res) {
-  // implement user login
+  if(req.body.username && req.body.password) {
+    db.findBy({username: req.body.username})
+      .then(user => {
+        if(user && bcrypt.compareSync(req.body.password, user.password)) {
+          const token = generateToken(user);
+          res.status(200).json({message: `Welcome ${user.username}!`, token});
+        } else {
+          res.status(401).json({message: 'Invalid credentials'});
+        }
+      })
+  } else {
+    res.status(400).json({message: 'Please provide a username and password'});
+  }
 }
 
 function getJokes(req, res) {
@@ -29,4 +54,10 @@ function getJokes(req, res) {
     .catch(err => {
       res.status(500).json({ message: 'Error Fetching Jokes', error: err });
     });
+}
+
+function getUsers(req, res) {
+  db.get()
+    .then(users => res.status(200).json(users))
+    .catch(err => res.status(500).json({message: 'Could not retrieve list of users at this time', err}));
 }
