@@ -23,7 +23,7 @@ const App = props => {
 
   return (
     <div className="App">
-      <Route exact path="/" render={props => <HomeView {...props} />} />
+      <Route exact path="/" render={props => <HomeView {...props} createToast={createToast} />} />
       <Route
         path="/login"
         render={props => <LoginView {...props} createToast={createToast} />}

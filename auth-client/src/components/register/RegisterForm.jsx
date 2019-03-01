@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import "./Register.css";
+
 const RegisterForm = props => {
   return (
     <form className="auth-form" onSubmit={props.register}>

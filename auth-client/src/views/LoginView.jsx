@@ -27,7 +27,9 @@ const LoginView = props => {
         props.createToast(res.data.message, "success");
         props.history.push("/");
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        props.createToast(err.response.data.message, "error");
+      });
   };
 
   return (

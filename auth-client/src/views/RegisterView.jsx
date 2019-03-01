@@ -27,7 +27,9 @@ const RegisterView = props => {
         props.createToast("Successfully Registered!", "success");
         props.history.push("/");
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        props.createToast(err.response.data.message, "error");
+      });
   };
   return (
     <div>
