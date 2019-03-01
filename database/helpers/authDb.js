@@ -6,12 +6,19 @@ module.exports = {
   findBy
 }
 
-function get() {
-  return db('users');
+function get(id) {
+  if(id) {
+    return db('users').where({id: id}).first();
+  } else {
+    return db('users');
+  }
 }
 
 function insert(user) {
-  return db('users').insert(user);
+  return db('users').insert(user)
+    .then(id => {
+      return get(id[0]);
+    })
 }
 
 function findBy(filter) {
